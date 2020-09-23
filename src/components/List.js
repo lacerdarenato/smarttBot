@@ -1,17 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 
-/*Componente para listar as siglas de todas as moeda com o intuito de facilitar a navegação do usuário e selecionar a sigla correta para acessar as cotações */
+/*
+Componente para listar as siglas de todas as moeda 
+com o intuito de facilitar a navegação do usuário e 
+selecionar a sigla correta para acessar as cotações 
+*/
 
-export default class List extends Component {
-  getList = async () => {
-    const api_call_currencies = await fetch(
-      `https://poloniex.com/public?command=returnCurrencies`
-    );
-    const listCurrencies = await api_call_currencies.json();
+const List = (props) => (
+  <ul className="coin__key">
+    Sigla da moeda:
+    <li className="coin__value">Sigla capturada API</li>;
+  </ul>
+);
 
-    console.log(listCurrencies);
-  };
-  render() {
-    return <li className="coin__value">Lista</li>;
-  }
-}
+export default List;

@@ -7,6 +7,7 @@ import List from "./components/List";
 
 class App extends Component {
   state = {
+    listCurrencies: [],
     lastTrade: undefined,
     lowestAsk: undefined,
     highestBid: undefined,
@@ -25,8 +26,16 @@ class App extends Component {
     const dataCoin = await api_call_exchange.json();
     console.log(dataCoin);
 
+    const api_call_currencies = await fetch(
+      `https://poloniex.com/public?command=returnCurrencies`
+    );
+    const listCurrencies = await api_call_currencies.json();
+    console.log(listCurrencies);
+    const lista = Object.entries(listCurrencies);
+    console.log(lista);
     if (dataCoin.Response === "Error") {
       this.setState({
+        listCurrencies: [],
         lastTrade: undefined,
         lowestAsk: undefined,
         highestBid: undefined,
@@ -37,6 +46,7 @@ class App extends Component {
     } else if (coin && currency) {
       const key = coin + "_" + currency;
       this.setState({
+        listCurrencies: lista,
         lastTrade: dataCoin[key]["last"],
         lowestAsk: dataCoin[key]["lowestAsk"],
         highestBid: dataCoin[key]["highestBid"],
@@ -46,6 +56,7 @@ class App extends Component {
       });
     } else {
       this.setState({
+        listCurrencies: [],
         lastTrade: undefined,
         lowestAsk: undefined,
         highestBid: undefined,
@@ -76,9 +87,9 @@ class App extends Component {
                     percentChange={this.state.percentChange}
                     error={this.state.error}
                   />
-                  <div>
+                  <div className="coin__info">
                     <ul>
-                      <List getList={this.getList} />
+                      <List getList={this.getCoin} />
                     </ul>
                   </div>
                 </div>
