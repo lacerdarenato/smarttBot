@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 
 import Title from "./components/Title";
 import Form from "./components/Form";
 import Coin from "./components/Coin";
+import List from "./components/List";
 
-class App extends React.Component {
+class App extends Component {
   state = {
     lastTrade: undefined,
     lowestAsk: undefined,
@@ -19,12 +20,10 @@ class App extends React.Component {
     const coin = e.target.elements.coin.value;
     const currency = e.target.elements.currency.value;
     const api_call_exchange = await fetch(
-      //`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${coin}&tsyms=${currency}`
       `https://poloniex.com/public?command=returnTicker`
     );
     const dataCoin = await api_call_exchange.json();
-    console.log("dataCoin is now ", dataCoin);
-    console.log("message is now ", dataCoin["Message"]);
+    console.log(dataCoin);
 
     if (dataCoin.Response === "Error") {
       this.setState({
@@ -77,6 +76,11 @@ class App extends React.Component {
                     percentChange={this.state.percentChange}
                     error={this.state.error}
                   />
+                  <div>
+                    <ul>
+                      <List getList={this.getList} />
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
