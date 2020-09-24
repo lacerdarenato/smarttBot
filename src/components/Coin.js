@@ -5,7 +5,7 @@ const Coin = (props) => (
     <div className="coin__info">
       {props.lastTrade && (
         <p className="coin__key">
-          Trade mais recente:
+          Preço mais recente:
           <span className="coin__value"> {props.lastTrade} </span>
         </p>
       )}

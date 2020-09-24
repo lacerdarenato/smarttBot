@@ -7,10 +7,7 @@ selecionar a sigla correta para acessar as cotações
 */
 
 const List = (props) => (
-  <ul className="coin__key">
-    Sigla da moeda:
-    <li className="coin__value">Sigla capturada API</li>;
-  </ul>
+  <li className="coin__value"> {props.listCurrencies}</li>
 );
 
 export default List;
