@@ -26,7 +26,6 @@ class App extends Component {
     );
     const listCurrencies = await api_call_currencies.json();
     const lista = Object.keys(listCurrencies);
-    console.log(lista);
 
     this.setState({
       listCurrencies: lista,
@@ -77,6 +76,15 @@ class App extends Component {
   };
 
   render() {
+    const {
+      listCurrencies,
+      lastTrade,
+      lowestAsk,
+      highestBid,
+      baseVolume,
+      percentChange,
+      error,
+    } = this.state;
     return (
       <div>
         <div className="wrapper">
@@ -89,16 +97,21 @@ class App extends Component {
                 <div className="col-xs-7 form-container">
                   <Form getCoin={this.getCoin} getList={this.getList} />
                   <Coin
-                    lastTrade={this.state.lastTrade}
-                    lowestAsk={this.state.lowestAsk}
-                    highestBid={this.state.highestBid}
-                    baseVolume={this.state.baseVolume}
-                    percentChange={this.state.percentChange}
-                    error={this.state.error}
+                    lastTrade={lastTrade}
+                    lowestAsk={lowestAsk}
+                    highestBid={highestBid}
+                    baseVolume={baseVolume}
+                    percentChange={percentChange}
+                    error={error}
                   />
-                  <ul className="coin__info">
-                    <List listCurrencies={this.state.listCurrencies} />
-                  </ul>
+
+                  {listCurrencies.map((listCurrencies, index) => {
+                    return (
+                      <ul key={index} className="coin__info">
+                        {<List listCurrencies={listCurrencies} />}
+                      </ul>
+                    );
+                  })}
                 </div>
               </div>
             </div>
