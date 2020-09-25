@@ -4,7 +4,7 @@ Projeto inspirado no projeto publicado no repositório [https://github.com/coder
 
 esta aplicação destina-se a mostrar a cotação de uma criptomoeda em relação a outra moeda escolhida.
 Fizemos algumas alterações para utilização com a api atravéz da requisição do seu método publico: [https://poloniex.com/public?command=returnTicker](https://poloniex.com/public?command=returnTicker)
-Se eu conseguir, tambem criarei uma lista com as moedas disponíveis atravez da requisição [https://poloniex.com/public?command=returnCurrencies](https://poloniex.com/public?command=returnCurrencies) a minha maior dificuldade parece ser muito besta, mas ainda não consegui pensar numa estratégia para resolver isso. o formato do Json onde a chave é a sigla em que eu quero exibir sendo assim não consigo executar o map da forma correta para listar todas as siglas possíveis.
+Criada uma lista com as moedas disponíveis atravez da requisição [https://poloniex.com/public?command=returnCurrencies](https://poloniex.com/public?command=returnCurrencies)
 
 ## Ambiente
 

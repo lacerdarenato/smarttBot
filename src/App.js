@@ -4,12 +4,14 @@ import Title from "./components/Title";
 import Form from "./components/Form";
 import Coin from "./components/Coin";
 import List from "./components/List";
+import Ranking from "./components/Ranking";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
+      ranking: [],
       listCurrencies: [],
       lastTrade: undefined,
       lowestAsk: undefined,
@@ -19,6 +21,35 @@ class App extends Component {
       error: undefined,
     };
   }
+  getRank = async () => {
+    const api_call_exchange = await fetch(
+      `https://poloniex.com/public?command=returnTicker`
+    );
+    const dataRank = await api_call_exchange.json();
+    const rankList = Object.entries(dataRank);
+    let rankValues = [];
+    rankList.map((item) =>
+      rankValues.push({
+        nome: item[0],
+        id: item[1].id,
+        last: item[1].last,
+        lowestAsk: item[1].lowestAsk,
+        highestBid: item[1].highestBid,
+        percentChange: item[1].percentChange,
+        baseVolume: item[1].baseVolume,
+        quoteVolume: item[1].quoteVolume,
+        isFrozen: item[1].isFrozen,
+        high24hr: item[1].high24hr,
+        low24hr: item[1].low24hr,
+      })
+    );
+    console.log(rankValues);
+
+    this.setState({
+      listCurrencies: [],
+      ranking: rankValues, //desativado apenas para testar na console.
+    });
+  };
 
   getList = async () => {
     const api_call_currencies = await fetch(
@@ -29,6 +60,7 @@ class App extends Component {
 
     this.setState({
       listCurrencies: lista,
+      ranking: [],
     });
   };
 
@@ -43,7 +75,6 @@ class App extends Component {
 
     if (dataCoin.Response === "Error") {
       this.setState({
-        //listCurrencies: [],
         lastTrade: undefined,
         lowestAsk: undefined,
         highestBid: undefined,
@@ -54,7 +85,6 @@ class App extends Component {
     } else if (coin && currency) {
       const key = coin + "_" + currency;
       this.setState({
-        //listCurrencies: lista,
         lastTrade: dataCoin[key]["last"],
         lowestAsk: dataCoin[key]["lowestAsk"],
         highestBid: dataCoin[key]["highestBid"],
@@ -64,7 +94,6 @@ class App extends Component {
       });
     } else {
       this.setState({
-        //listCurrencies: [],
         lastTrade: undefined,
         lowestAsk: undefined,
         highestBid: undefined,
@@ -77,6 +106,7 @@ class App extends Component {
 
   render() {
     const {
+      ranking,
       listCurrencies,
       lastTrade,
       lowestAsk,
@@ -85,6 +115,9 @@ class App extends Component {
       percentChange,
       error,
     } = this.state;
+
+    //const { nome, last, id } = ranking;
+
     return (
       <div>
         <div className="wrapper">
@@ -95,7 +128,11 @@ class App extends Component {
                   <Title />
                 </div>
                 <div className="col-xs-7 form-container">
-                  <Form getCoin={this.getCoin} getList={this.getList} />
+                  <Form
+                    getCoin={this.getCoin}
+                    getList={this.getList}
+                    getRank={this.getRank}
+                  />
                   <Coin
                     lastTrade={lastTrade}
                     lowestAsk={lowestAsk}
@@ -109,6 +146,18 @@ class App extends Component {
                     return (
                       <ul key={index} className="coin__info">
                         {<List listCurrencies={listCurrencies} />}
+                      </ul>
+                    );
+                  })}
+                  {ranking.map((ranking, index) => {
+                    return (
+                      <ul key={index} className="coin__info">
+                        {
+                          <Ranking
+                            nome={ranking["nome"]}
+                            last={ranking["last"]}
+                          />
+                        }
                       </ul>
                     );
                   })}

@@ -105,8 +105,8 @@ button:active {
 
 .coin__key {
   color: #f16051;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.06);
-  padding: 20px 0 20px 0;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.06);
+  padding: 5px 0 5px 0;
   font-weight: 400;
 }
 
@@ -116,7 +116,7 @@ button:active {
 
 .coin__value {
   color: #fff;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .coin__error {

@@ -8,6 +8,7 @@ const Form = (props) => (
       <button>Buscar Cotação</button>
     </form>
     <button onClick={props.getList}>Lista Siglas</button>
+    <button onClick={props.getRank}>Ranking</button>
   </div>
 );
 
