@@ -44,10 +44,14 @@ class App extends Component {
       })
     );
     console.log(rankValues);
+    rankValues = rankValues.sort(function (a, b) {
+      return a.last - b.last;
+    });
+    console.log(rankValues);
 
     this.setState({
       listCurrencies: [],
-      ranking: rankValues, //desativado apenas para testar na console.
+      ranking: rankValues,
     });
   };
 
@@ -149,9 +153,9 @@ class App extends Component {
                       </ul>
                     );
                   })}
-                  {ranking.map((ranking, index) => {
+                  {ranking.map((ranking) => {
                     return (
-                      <ul key={index} className="coin__info">
+                      <ul key={ranking["id"]} className="coin__info">
                         {
                           <Ranking
                             nome={ranking["nome"]}
