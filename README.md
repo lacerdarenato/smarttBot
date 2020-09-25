@@ -9,7 +9,7 @@ O retorno será um objeto json no padrão:
 ```json
 
     {
-        ...
+        
         "BTC_BTS": {
             "id": 14,
             "last": "0.00000237",
@@ -22,7 +22,7 @@ O retorno será um objeto json no padrão:
             "high24hr": "0.00000237",
             "low24hr": "0.00000225"
         },
-        ...
+       
     }
 
 ```
@@ -70,7 +70,7 @@ Para facilitar a utilização do App é possível listar as siglas disponíveis 
 
 ```json
     {
-        ...
+        
         1CR: {
         id: 1,
         name: "1CRedit",
@@ -85,7 +85,7 @@ Para facilitar a utilização do App é possível listar as siglas disponíveis 
         hexColor: "068485",
         isGeofenced: 0
         },
-        ...
+        
     }
 ```
 
